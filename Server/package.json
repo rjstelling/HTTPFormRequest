@@ -1,0 +1,10 @@
+{
+  "name": "httpformrequest-server",
+  "version": "0.0.1",
+  "author": "Richard Stelling",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "*",
+    "multer": "^1.2.1"
+  }
+}
