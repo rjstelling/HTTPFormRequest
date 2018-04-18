@@ -7,11 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E876ECCF2087AFCC00E7A845 /* HTTPFormRequest_Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = E876ECCE2087AFCC00E7A845 /* HTTPFormRequest_Library.swift */; };
+		E876ECD32087B01000E7A845 /* HTTPFormRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DA8E5B1E2456E700BB3F21 /* HTTPFormRequest.swift */; };
 		E8DA8E551E2456CB00BB3F21 /* HTTPFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E8DA8E531E2456CB00BB3F21 /* HTTPFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8DA8E5C1E2456E700BB3F21 /* HTTPFormRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DA8E5B1E2456E700BB3F21 /* HTTPFormRequest.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E876ECCA2087AFCC00E7A845 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E876ECCC2087AFCC00E7A845 /* libHTTPFormRequest-Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libHTTPFormRequest-Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E876ECCE2087AFCC00E7A845 /* HTTPFormRequest_Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFormRequest_Library.swift; sourceTree = "<group>"; };
 		E8DA8E501E2456CB00BB3F21 /* HTTPFormRequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPFormRequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DA8E531E2456CB00BB3F21 /* HTTPFormRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPFormRequest.h; sourceTree = "<group>"; };
 		E8DA8E541E2456CB00BB3F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -19,6 +35,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E876ECC92087AFCC00E7A845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8DA8E4C1E2456CB00BB3F21 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,10 +52,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E876ECCD2087AFCC00E7A845 /* HTTPFormRequest-Library */ = {
+			isa = PBXGroup;
+			children = (
+				E876ECCE2087AFCC00E7A845 /* HTTPFormRequest_Library.swift */,
+			);
+			path = "HTTPFormRequest-Library";
+			sourceTree = "<group>";
+		};
 		E8DA8E461E2456CB00BB3F21 = {
 			isa = PBXGroup;
 			children = (
 				E8DA8E521E2456CB00BB3F21 /* HTTPFormRequest */,
+				E876ECCD2087AFCC00E7A845 /* HTTPFormRequest-Library */,
 				E8DA8E511E2456CB00BB3F21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				E8DA8E501E2456CB00BB3F21 /* HTTPFormRequest.framework */,
+				E876ECCC2087AFCC00E7A845 /* libHTTPFormRequest-Library.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +102,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E876ECCB2087AFCC00E7A845 /* HTTPFormRequest-Library */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E876ECD02087AFCC00E7A845 /* Build configuration list for PBXNativeTarget "HTTPFormRequest-Library" */;
+			buildPhases = (
+				E876ECC82087AFCC00E7A845 /* Sources */,
+				E876ECC92087AFCC00E7A845 /* Frameworks */,
+				E876ECCA2087AFCC00E7A845 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HTTPFormRequest-Library";
+			productName = "HTTPFormRequest-Library";
+			productReference = E876ECCC2087AFCC00E7A845 /* libHTTPFormRequest-Library.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		E8DA8E4F1E2456CB00BB3F21 /* HTTPFormRequest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8DA8E581E2456CC00BB3F21 /* Build configuration list for PBXNativeTarget "HTTPFormRequest" */;
@@ -93,9 +143,15 @@
 		E8DA8E471E2456CB00BB3F21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Richard Stelling";
 				TargetAttributes = {
+					E876ECCB2087AFCC00E7A845 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = PYQF8Y7S2V;
+						ProvisioningStyle = Automatic;
+					};
 					E8DA8E4F1E2456CB00BB3F21 = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 0940;
@@ -116,6 +172,7 @@
 			projectRoot = "";
 			targets = (
 				E8DA8E4F1E2456CB00BB3F21 /* HTTPFormRequest */,
+				E876ECCB2087AFCC00E7A845 /* HTTPFormRequest-Library */,
 			);
 		};
 /* End PBXProject section */
@@ -131,6 +188,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E876ECC82087AFCC00E7A845 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E876ECCF2087AFCC00E7A845 /* HTTPFormRequest_Library.swift in Sources */,
+				E876ECD32087B01000E7A845 /* HTTPFormRequest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8DA8E4B1E2456CB00BB3F21 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,6 +208,46 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		E876ECD12087AFCC00E7A845 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PYQF8Y7S2V;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E876ECD22087AFCC00E7A845 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PYQF8Y7S2V;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E8DA8E561E2456CC00BB3F21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +407,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E876ECD02087AFCC00E7A845 /* Build configuration list for PBXNativeTarget "HTTPFormRequest-Library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E876ECD12087AFCC00E7A845 /* Debug */,
+				E876ECD22087AFCC00E7A845 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E8DA8E4A1E2456CB00BB3F21 /* Build configuration list for PBXProject "HTTPFormRequest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
