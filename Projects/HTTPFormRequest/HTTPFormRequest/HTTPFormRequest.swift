@@ -42,7 +42,6 @@ public class HTTPFormRequest {
 
 extension HTTPFormRequest {
     
-    
     /// Add a key-valuse pair to the post request
     ///
     /// - Parameters:
@@ -64,7 +63,6 @@ extension HTTPFormRequest {
         return formField.data(using: String.Encoding.utf8)! //TODO: throw
     }
     
-    
     /// Add a file to the post request
     ///
     /// - Parameters:
@@ -73,8 +71,8 @@ extension HTTPFormRequest {
     func add(file data: Data, filename: String) {
         
         let fileField = "\r\n--\(self.boundary)\r\n" +
-            "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n" +
-        "Content-Type: application/octet-stream\r\n\r\n"
+                        "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n" +
+                        "Content-Type: application/octet-stream\r\n\r\n"
         
         self.data.append(fileField.data(using: String.Encoding.utf8)!)
         self.data.append(data)
