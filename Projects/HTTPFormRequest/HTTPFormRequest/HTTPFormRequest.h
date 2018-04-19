@@ -6,10 +6,10 @@
 //  Copyright © 2017 Richard Stelling. All rights reserved.
 //
 
-#if TARGET_OS_OSX
-@import Cocoa;
-#else
+#ifdef TARGET_OS_IPHONE
 @import UIKit;
+#else
+@import Cocoa;
 #endif
 
 //! Project version number for HTTPFormRequest.
