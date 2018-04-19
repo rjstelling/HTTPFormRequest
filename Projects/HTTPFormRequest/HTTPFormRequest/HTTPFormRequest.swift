@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if canImport(MobileCoreServices)
+import MobileCoreServices
+#elseif canImport(CoreServices)
+import CoreServices
+#endif
+
 public extension URLSession {
     
     public func dataTaskWithHTTPFormRequest(_ request: HTTPFormRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
@@ -26,6 +32,18 @@ public extension URLSession {
 }
 
 public class HTTPFormRequest {
+    
+    public enum ContentType: String {
+        
+        case octetStream = "application/octet-stream"
+        
+        // Images
+        case png = "image/png"
+        case jpg = "image/jpg"
+        
+        // Documents
+        case excel = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    }
     
     fileprivate var urlRequest: URLRequest
     fileprivate let boundary: String
@@ -68,14 +86,59 @@ extension HTTPFormRequest {
     /// - Parameters:
     ///   - data: The file data
     ///   - filename: the file name of the file
-    func add(file data: Data, filename: String) {
+    private func add(file data: Data, filename: String, contentType: String, name: String = "file") {
         
         let fileField = "\r\n--\(self.boundary)\r\n" +
-                        "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n" +
-                        "Content-Type: application/octet-stream\r\n\r\n"
+            "Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(filename)\"\r\n" +
+        "Content-Type: \(contentType)\r\n\r\n"
         
         self.data.append(fileField.data(using: String.Encoding.utf8)!)
         self.data.append(data)
     }
+
+    public func add(file data: Data, filename: String, contentType: ContentType = .octetStream, name: String = "file") {
+        self.add(file: data, filename: filename, contentType: contentType.rawValue, name: name)
+    }
+    
+    /// Add a local file (at `url`) to the request. Passing a URL that is not a local file
+    /// i.e. `url.isFileURL == true` will cause a fatal error.
+    ///
+    /// - Parameters:
+    ///   - url: URL to a loca file with read permissions
+    ///   - filename: The name of the file, if nil the file name from `url` will be used
+    ///   - contentType: The UTI of the data, passing nil will cause the system to determine the UTI and convert to a mime type
+    public func add(file url: URL, filename: String? = nil, contentType: ContentType? = nil, name: String = "file") {
+        
+        guard url.isFileURL else {
+            fatalError("URL must be local!")
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            return
+        }
+        
+        // Get name for file
+        let fName = filename ?? url.lastPathComponent
+        let extention = (url.path as NSString).pathExtension
+        
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, extention as CFString, nil)?.takeRetainedValue(),
+            let mimeType = (UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() as String?) {
+            self.add(file: data, filename: fName, contentType: mimeType, name: name)
+        }
+        else {
+            self.add(file: data, filename: fName, name: name)
+        }
+    }
+    
+    // Add a file - using URL
+/*NSString *filePath = ... // assume the path to a file from somewhere else.
+ CFStringRef fileExtension = (__bridge CFStringRef)[filePath pathExtension];
+ CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+ CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+ CFRelease(UTI);
+ NSString *MIMETypeString = (__bridge_transfer NSString *)MIMEType;*/
+    
+    
+    
 }
 
