@@ -6,7 +6,11 @@
 //  Copyright © 2017 Richard Stelling. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#if TARGET_OS_OSX
+@import Cocoa;
+#else
+@import UIKit;
+#endif
 
 //! Project version number for HTTPFormRequest.
 FOUNDATION_EXPORT double HTTPFormRequestVersionNumber;
@@ -15,5 +19,4 @@ FOUNDATION_EXPORT double HTTPFormRequestVersionNumber;
 FOUNDATION_EXPORT const unsigned char HTTPFormRequestVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <HTTPFormRequest/PublicHeader.h>
-
 
