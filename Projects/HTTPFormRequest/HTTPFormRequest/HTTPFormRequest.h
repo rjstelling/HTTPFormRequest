@@ -6,7 +6,9 @@
 //  Copyright © 2017 Richard Stelling. All rights reserved.
 //
 
-#ifdef TARGET_OS_IPHONE
+@import Foundation;
+
+#if TARGET_OS_IPHONE == 1
 @import UIKit;
 #else
 @import Cocoa;
