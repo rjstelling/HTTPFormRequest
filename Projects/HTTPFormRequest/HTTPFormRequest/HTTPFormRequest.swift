@@ -48,6 +48,12 @@ public class HTTPFormRequest {
     fileprivate var urlRequest: URLRequest
     fileprivate let boundary: String
     fileprivate let data: NSMutableData = NSMutableData()
+
+    /// Specifies the limit on the idle interval allotted to a request in the process of loading.
+    public var timeoutInterval: TimeInterval {
+        set { self.urlRequest.timeoutInterval = newValue }
+        get { return self.urlRequest.timeoutInterval }
+    }
     
     public init(withURL url: URL) {
         
