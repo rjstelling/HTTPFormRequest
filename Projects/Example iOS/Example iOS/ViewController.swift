@@ -45,5 +45,32 @@ class ViewController: UIViewController {
         
         task.resume()
     }
+
+    struct JSON: Codable {
+        let foo: String
+        let moo: Int
+        let loo: [String]
+    }
+    
+    @IBAction func onUploadJSON(_ sender: UIButton) {
+        
+        let json = JSON(foo: "bar", moo: 123, loo: ["a", "b", "c"])
+
+        guard let url = URL(string: "http://localhost:1973/httpformrequest-test-000") else {
+            return
+        }
+        
+        let request = HTTPFormRequest(withURL: url)
+        request.add(parameters: json)
+        
+        let task = self.session.dataTaskWithHTTPFormRequest(request) {_,_,_ in
+            
+            
+        }
+        
+        task.resume()
+        
+    }
+    
 }
 

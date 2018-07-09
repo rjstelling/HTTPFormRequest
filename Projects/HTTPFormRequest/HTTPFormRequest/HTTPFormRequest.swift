@@ -76,6 +76,11 @@ extension HTTPFormRequest {
         self.data.append(self.data(withField: field, value: value))
     }
     
+    /// Add a key-valuse pair to the post request
+    ///
+    /// - Parameters:
+    ///   - field: name of the field
+    ///   - value: the integer value for the field
     public func add(formField field: String, value: Int) {
         
         self.data.append(self.data(withField: field, value: "\(value)"))
@@ -136,15 +141,15 @@ extension HTTPFormRequest {
         }
     }
     
-    // Add a file - using URL
-/*NSString *filePath = ... // assume the path to a file from somewhere else.
- CFStringRef fileExtension = (__bridge CFStringRef)[filePath pathExtension];
- CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
- CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
- CFRelease(UTI);
- NSString *MIMETypeString = (__bridge_transfer NSString *)MIMEType;*/
-    
-    
-    
+    public func add(parameters params: Encodable) {
+        
+        
+        
+        
+        let ui = params.
+        
+        print("\(ui)")
+        
+    }
 }
 

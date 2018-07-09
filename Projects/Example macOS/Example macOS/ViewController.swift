@@ -94,5 +94,12 @@ class ViewController: NSViewController {
         
     }
     
+//    @IBAction func onSendJSONObj(_ sender: UIButton) {
+//        
+//        
+//        
+//    }
+    
+    
 }
 
