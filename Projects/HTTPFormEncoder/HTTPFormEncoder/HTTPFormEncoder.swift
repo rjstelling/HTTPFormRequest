@@ -27,7 +27,7 @@ public class HTTPFormEncoder: Encoder {
         self.codingPath = codingPath
     }
     
-    func encode<T : Encodable>(_ value: T) throws -> [(String, String)] {
+    public func encode<T>(_ value: T) throws -> [(String, String)] where T : Encodable {
         
         try value.encode(to: self)
         

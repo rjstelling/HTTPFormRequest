@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HTTPFormEncoder
 
 #if canImport(MobileCoreServices)
 import MobileCoreServices
@@ -141,15 +142,14 @@ extension HTTPFormRequest {
         }
     }
     
-    public func add(parameters params: Encodable) {
+    public func add<T>(parameters params: T) throws where T: Encodable {
         
+        let encoder = HTTPFormEncoder()
+        let encodedParams = try encoder.encode(params)
         
-        
-        
-        //let ui = params.
-        
-        //print("\(ui)")
-        
+        encodedParams.forEach {
+            self.add(formField: $0.0, value: $0.1)
+        }
     }
 }
 

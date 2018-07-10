@@ -24,7 +24,7 @@ class HTTPFormEncoderTests: XCTestCase {
     func testSimpleStructs() {
         
         let json = JSON(foo: "hello world", bar: "magic swift", moo: 123, moo8: 127, moo16: 789, moo32: 159, moo64: 753, loo: 2.0, boo: 3.14159262, baz0: false, baz1: true, zaz: nil, zaz1: nil, blup: ["a", "b", "c"], blop: Inner(foo: "hello", bar: 123), deep: Deep(scale: 3.0, planet: Inner(foo: "deep-inner", bar: 654)))
-                
+        
         do {
             let encoded = try HTTPFormEncoder().encode(json)
             print("PRAMS: \(encoded)")
