@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Prototypes/TestEncode/TestEncode.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Projects/Example macOS/Example macOS.xcodeproj">
    </FileRef>
    <FileRef
@@ -12,5 +9,8 @@
    </FileRef>
    <FileRef
       location = "group:Projects/HTTPFormRequest/HTTPFormRequest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Projects/HTTPFormEncoder/HTTPFormEncoder.xcodeproj">
    </FileRef>
 </Workspace>

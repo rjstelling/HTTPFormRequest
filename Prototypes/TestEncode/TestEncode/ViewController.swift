@@ -367,7 +367,6 @@ extension CodingUserInfoKey {
 
 class FormEncoder: Encoder {
     
-    
     var codingPath: [CodingKey]
     
     var userInfo: [CodingUserInfoKey : Any] = [:]
