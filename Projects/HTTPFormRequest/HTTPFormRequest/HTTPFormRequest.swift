@@ -17,6 +17,20 @@ import CoreServices
 
 public extension URLSession {
     
+    public func dataTask<T>(with request: T, completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) -> URLSessionDataTask where T: HTTPFormRequest {
+        
+        //First boundry
+        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
+        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+        
+        let length = request.data.length
+        request.urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+        
+        request.urlRequest.httpBody = request.data as Data
+        
+        return self.dataTask(with: request.urlRequest, completionHandler: completionHandler)
+    }
+    
     public func dataTaskWithHTTPFormRequest(_ request: HTTPFormRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         
         //First boundry
