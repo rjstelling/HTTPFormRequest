@@ -99,6 +99,10 @@ extension HTTPFormRequest {
     public func setValue(_ value: String?, forHTTPHeaderField field: String) {
         self.urlRequest.setValue(value, forHTTPHeaderField: field)
     }
+    
+    public func addValue(_ value: String, forHTTPHeaderField field: String) {
+        self.urlRequest.addValue(value, forHTTPHeaderField: field)
+    }
 }
 
 extension HTTPFormRequest {
