@@ -30,7 +30,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E8424D5E20F3A6320088781D /* Development.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Development.playground; path = ../../Development.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E8DA8E661E24576300BB3F21 /* Example iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DA8E691E24576300BB3F21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8DA8E6B1E24576300BB3F21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +55,6 @@
 		E8DA8E5D1E24576300BB3F21 = {
 			isa = PBXGroup;
 			children = (
-				E8424D5E20F3A6320088781D /* Development.playground */,
 				E8DA8E681E24576300BB3F21 /* Example iOS */,
 				E8DA8E671E24576300BB3F21 /* Products */,
 				E8DA8E7B1E24579D00BB3F21 /* Frameworks */,
@@ -310,6 +308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 67BU7Q9MHN;
 				INFOPLIST_FILE = "Example iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,6 +325,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 67BU7Q9MHN;
 				INFOPLIST_FILE = "Example iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

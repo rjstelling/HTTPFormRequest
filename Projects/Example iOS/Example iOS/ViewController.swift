@@ -50,26 +50,31 @@ class ViewController: UIViewController {
         let foo: String
         let moo: Int
         let loo: [String]
+        let TEST: String
     }
     
     @IBAction func onUploadJSON(_ sender: UIButton) {
         
-        let json = JSON(foo: "bar", moo: 123, loo: ["a", "b", "c"])
+        let json = JSON(foo: "bar", moo: 123, loo: ["a", "b", "c"], TEST: "HELLO WORLD!")
 
         guard let url = URL(string: "http://localhost:1973/httpformrequest-test-000") else {
             return
         }
         
-        let request = HTTPFormRequest(withURL: url)
-        request.add(parameters: json)
+        do {
+            let request = HTTPFormRequest(withURL: url)
+            try request.add(parameters: json)
         
-        let task = self.session.dataTaskWithHTTPFormRequest(request) {_,_,_ in
+            let task = self.session.dataTaskWithHTTPFormRequest(request) {_,_,_ in
+                
+                
+            }
             
-            
+            task.resume()
         }
-        
-        task.resume()
-        
+        catch {
+            print("ERROR: \(error)")
+        }
     }
     
 }
