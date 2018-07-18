@@ -20,15 +20,15 @@ public extension URLSession {
     public func dataTask(with request: HTTPFormRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) -> URLSessionDataTask {
         
         //First boundry
-        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
-        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+//        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
+//        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+//
+//        let length = request.data.length
+//        request._urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+//
+//        request._urlRequest.httpBody = request.data as Data
         
-        let length = request.data.length
-        request.urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
-        
-        request.urlRequest.httpBody = request.data as Data
-        
-        return self.dataTask(with: request.urlRequest, completionHandler: completionHandler)
+        return self.dataTask(with: request.urlRequest(), completionHandler: completionHandler)
     }
     
 //    public func dataTask<T>(with request: T, completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) -> URLSessionDataTask where T: HTTPFormRequest {
@@ -48,15 +48,15 @@ public extension URLSession {
     public func dataTaskWithHTTPFormRequest(_ request: HTTPFormRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         
         //First boundry
-        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
-        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+//        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
+//        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+//        
+//        let length = request.data.length
+//        request._urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+//        
+//        request._urlRequest.httpBody = request.data as Data
         
-        let length = request.data.length
-        request.urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
-        
-        request.urlRequest.httpBody = request.data as Data
-        
-        return self.dataTask(with: request.urlRequest, completionHandler: completionHandler)
+        return self.dataTask(with: request.urlRequest(), completionHandler: completionHandler)
     }
 }
 
@@ -74,34 +74,53 @@ public class HTTPFormRequest {
         case excel = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     }
     
-    fileprivate var urlRequest: URLRequest
+    fileprivate var _urlRequest: URLRequest
     fileprivate let boundary: String
     fileprivate let data: NSMutableData = NSMutableData()
 
     /// Specifies the limit on the idle interval allotted to a request in the process of loading.
     public var timeoutInterval: TimeInterval {
-        set { self.urlRequest.timeoutInterval = newValue }
-        get { return self.urlRequest.timeoutInterval }
+        set { self._urlRequest.timeoutInterval = newValue }
+        get { return self._urlRequest.timeoutInterval }
     }
     
     public init(withURL url: URL) {
         
         self.boundary = UUID().uuidString
-        self.urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
-        self.urlRequest.httpMethod = "POST"
-        self.urlRequest.setValue("multipart/form-data; boundary=\(self.boundary)", forHTTPHeaderField: "Content-Type")
+        self._urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
+        self._urlRequest.httpMethod = "POST"
+        self._urlRequest.setValue("multipart/form-data; boundary=\(self.boundary)", forHTTPHeaderField: "Content-Type")
     }
+}
+
+extension HTTPFormRequest {
+    
+    public func urlRequest() -> URLRequest {
+        
+        //Last boundry
+        let lastBoundry = "\r\n--\(self.boundary)--\r\n"
+        self.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+        
+        let length = self.data.length
+        self._urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+        
+        self._urlRequest.httpBody = self.data as Data
+        
+        return _urlRequest
+    }
+    
+    
 }
 
 extension HTTPFormRequest {
     
     // Set HTTP headers on the request object
     public func setValue(_ value: String?, forHTTPHeaderField field: String) {
-        self.urlRequest.setValue(value, forHTTPHeaderField: field)
+        self._urlRequest.setValue(value, forHTTPHeaderField: field)
     }
     
     public func addValue(_ value: String, forHTTPHeaderField field: String) {
-        self.urlRequest.addValue(value, forHTTPHeaderField: field)
+        self._urlRequest.addValue(value, forHTTPHeaderField: field)
     }
 }
 
