@@ -95,6 +95,14 @@ public class HTTPFormRequest {
 
 extension HTTPFormRequest {
     
+    // Set HTTP headers on the request object
+    public func setValue(_ value: String?, forHTTPHeaderField field: String) {
+        self.urlRequest.setValue(value, forHTTPHeaderField: field)
+    }
+}
+
+extension HTTPFormRequest {
+    
     /// Add a key-valuse pair to the post request
     ///
     /// - Parameters:
