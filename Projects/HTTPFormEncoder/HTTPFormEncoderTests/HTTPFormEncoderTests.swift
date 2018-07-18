@@ -35,4 +35,17 @@ class HTTPFormEncoderTests: XCTestCase {
         
     }
     
+    func testSingelValueStructs() {
+        
+        //let svs = SingleValues(label: .abc1, more: [.efg, .efg, .abc1])
+        let svs = SingleValues(label: .abc1, info: NestedSingleValues(name: .funk, food: .🎃), val: .egg)
+        //let svs = SingleValues(info: NestedSingleValues(name: .funk))
+        do {
+            let encoded = try HTTPFormEncoder().encode(svs)
+            print("PRAMS: \(encoded)")
+        }
+        catch {
+            print("ERROR: \(error)")
+        }
+    }
 }
