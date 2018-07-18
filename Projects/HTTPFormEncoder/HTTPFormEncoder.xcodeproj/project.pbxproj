@@ -14,6 +14,7 @@
 		E844A92920F49C8700D0B386 /* HTTPFormKeyedEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E844A8F720F4997000D0B386 /* HTTPFormKeyedEncodingContainer.swift */; };
 		E844A92A20F49C8700D0B386 /* HTTPFormUnkeyedEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E844A8F920F499C400D0B386 /* HTTPFormUnkeyedEncodingContainer.swift */; };
 		E844A92B20F49CAA00D0B386 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E844A90A20F49B1100D0B386 /* Structures.swift */; };
+		E8D928B220FF43E40066DF98 /* HTTPFormSingleValueEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D928B120FF43E40066DF98 /* HTTPFormSingleValueEncodingContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		E844A91920F49C6B00D0B386 /* HTTPFormEncoderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPFormEncoderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E844A91E20F49C6B00D0B386 /* HTTPFormEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFormEncoderTests.swift; sourceTree = "<group>"; };
 		E844A92020F49C6B00D0B386 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8D928B120FF43E40066DF98 /* HTTPFormSingleValueEncodingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFormSingleValueEncodingContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				E844A8ED20F497DF00D0B386 /* HTTPFormEncoder.swift */,
 				E844A8F720F4997000D0B386 /* HTTPFormKeyedEncodingContainer.swift */,
 				E844A8F920F499C400D0B386 /* HTTPFormUnkeyedEncodingContainer.swift */,
+				E8D928B120FF43E40066DF98 /* HTTPFormSingleValueEncodingContainer.swift */,
 				E844A91320F49C6B00D0B386 /* HTTPFormEncoder.h */,
 				E844A91420F49C6B00D0B386 /* Info.plist */,
 			);
@@ -208,6 +211,7 @@
 			files = (
 				E844A92A20F49C8700D0B386 /* HTTPFormUnkeyedEncodingContainer.swift in Sources */,
 				E844A92820F49C8700D0B386 /* HTTPFormEncoder.swift in Sources */,
+				E8D928B220FF43E40066DF98 /* HTTPFormSingleValueEncodingContainer.swift in Sources */,
 				E844A92920F49C8700D0B386 /* HTTPFormKeyedEncodingContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
