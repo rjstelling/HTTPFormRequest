@@ -162,9 +162,10 @@ extension HTTPFormRequest {
         }
     }
     
-    public func add<T>(parameters params: T) throws where T: Encodable {
+    public func add<T>(parameters params: T, boolBoxValue: HTTPFormEncoder.BoolBoxValue = (true: "true", false: "false")) throws where T: Encodable {
         
         let encoder = HTTPFormEncoder()
+        encoder.boolBoxValues = boolBoxValue
         let encodedParams = try encoder.encode(params)
         
         encodedParams.forEach {
