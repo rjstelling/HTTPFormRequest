@@ -21,7 +21,9 @@ public class HTTPFormEncoder: Encoder {
     // This is an arrya so it can hold multiple parama keyed with `name[]` etc
     internal var parameters: [(String, String)] = []
     
-    //public init() {}
+    // Config
+    public typealias BoolBoxValue = (`true`: String, `false`: String)
+    public var boolBoxValues: BoolBoxValue = (true: "true", false: "false")
     
     public init(codingPath: [CodingKey] = []) {
         self.codingPath = codingPath
@@ -34,7 +36,7 @@ public class HTTPFormEncoder: Encoder {
         return self.parameters
     }
     
-    internal func box(_ value: Bool)   -> String { return "\(value ? "true" : "false")" }
+    internal func box(_ value: Bool)   -> String { return "\(value ? self.boolBoxValues.true : self.boolBoxValues.false)" }
     internal func box(_ value: Int)    -> String { return "\(value)" }
     internal func box(_ value: Int8)   -> String { return "\(value)" }
     internal func box(_ value: Int16)  -> String { return "\(value)" }
