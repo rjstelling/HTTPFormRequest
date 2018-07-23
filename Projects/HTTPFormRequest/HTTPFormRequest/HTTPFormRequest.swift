@@ -70,8 +70,6 @@ extension HTTPFormRequest {
         
         return _urlRequest
     }
-    
-    
 }
 
 extension HTTPFormRequest {
@@ -110,7 +108,8 @@ extension HTTPFormRequest {
     
     fileprivate func data(withField field: String, value: String) -> Data {
         
-        let formField = "\r\n--\(self.boundary)\r\nContent-Disposition: form-data; name=\"\(field)\"\r\n\r\n\(value)"
+        // The "\r\n" is appended here because having multiple "\r\n" after the headers can throw off lesser parsers
+        let formField = "--\(self.boundary)\r\nContent-Disposition: form-data; name=\"\(field)\"\r\n\r\n\(value)\r\n"
         return formField.data(using: String.Encoding.utf8)! //TODO: throw
     }
     
