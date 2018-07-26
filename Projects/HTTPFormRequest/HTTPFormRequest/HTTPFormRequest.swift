@@ -16,33 +16,9 @@ import CoreServices
 #endif
 
 public extension URLSession {
-    
-    public func dataTask<T>(with request: T, completionHandler: @escaping (Data?, URLResponse?, Error?) -> ()) -> URLSessionDataTask where T: HTTPFormRequest {
-        
-        //First boundry
-        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
-        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
-        
-        let length = request.data.length
-        request.urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
-        
-        request.urlRequest.httpBody = request.data as Data
-        
-        return self.dataTask(with: request.urlRequest, completionHandler: completionHandler)
-    }
-    
+
     public func dataTaskWithHTTPFormRequest(_ request: HTTPFormRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        
-        //First boundry
-        let lastBoundry = "\r\n--\(request.boundary)--\r\n"
-        request.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
-        
-        let length = request.data.length
-        request.urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
-        
-        request.urlRequest.httpBody = request.data as Data
-        
-        return self.dataTask(with: request.urlRequest, completionHandler: completionHandler)
+        return self.dataTask(with: request.urlRequest(), completionHandler: completionHandler)
     }
 }
 
@@ -60,22 +36,51 @@ public class HTTPFormRequest {
         case excel = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     }
     
-    fileprivate var urlRequest: URLRequest
+    fileprivate var _urlRequest: URLRequest
     fileprivate let boundary: String
     fileprivate let data: NSMutableData = NSMutableData()
 
     /// Specifies the limit on the idle interval allotted to a request in the process of loading.
     public var timeoutInterval: TimeInterval {
-        set { self.urlRequest.timeoutInterval = newValue }
-        get { return self.urlRequest.timeoutInterval }
+        set { self._urlRequest.timeoutInterval = newValue }
+        get { return self._urlRequest.timeoutInterval }
     }
     
     public init(withURL url: URL) {
         
         self.boundary = UUID().uuidString
-        self.urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
-        self.urlRequest.httpMethod = "POST"
-        self.urlRequest.setValue("multipart/form-data; boundary=\(self.boundary)", forHTTPHeaderField: "Content-Type")
+        self._urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
+        self._urlRequest.httpMethod = "POST"
+        self._urlRequest.setValue("multipart/form-data; boundary=\(self.boundary)", forHTTPHeaderField: "Content-Type")
+    }
+}
+
+extension HTTPFormRequest {
+    
+    public func urlRequest() -> URLRequest {
+        
+        //Last boundry
+        let lastBoundry = "\r\n--\(self.boundary)--\r\n"
+        self.data.append(lastBoundry.data(using: String.Encoding.utf8)!)
+        
+        let length = self.data.length
+        self._urlRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+        
+        self._urlRequest.httpBody = self.data as Data
+        
+        return _urlRequest
+    }
+}
+
+extension HTTPFormRequest {
+    
+    // Set HTTP headers on the request object
+    public func setValue(_ value: String?, forHTTPHeaderField field: String) {
+        self._urlRequest.setValue(value, forHTTPHeaderField: field)
+    }
+    
+    public func addValue(_ value: String, forHTTPHeaderField field: String) {
+        self._urlRequest.addValue(value, forHTTPHeaderField: field)
     }
 }
 
@@ -103,7 +108,8 @@ extension HTTPFormRequest {
     
     fileprivate func data(withField field: String, value: String) -> Data {
         
-        let formField = "\r\n--\(self.boundary)\r\nContent-Disposition: form-data; name=\"\(field)\"\r\n\r\n\(value)"
+        // The "\r\n" is appended here because having multiple "\r\n" after the headers can throw off lesser parsers
+        let formField = "--\(self.boundary)\r\nContent-Disposition: form-data; name=\"\(field)\"\r\n\r\n\(value)\r\n"
         return formField.data(using: String.Encoding.utf8)! //TODO: throw
     }
     
@@ -156,9 +162,10 @@ extension HTTPFormRequest {
         }
     }
     
-    public func add<T>(parameters params: T) throws where T: Encodable {
+    public func add<T>(parameters params: T, boolBoxValue: HTTPFormEncoder.BoolBoxValue = (true: "true", false: "false")) throws where T: Encodable {
         
         let encoder = HTTPFormEncoder()
+        encoder.boolBoxValues = boolBoxValue
         let encodedParams = try encoder.encode(params)
         
         encodedParams.forEach {

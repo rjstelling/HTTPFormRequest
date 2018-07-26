@@ -43,6 +43,41 @@ struct JSON: Codable {
     let deep: Deep
 }
 
+struct NestedSingleValues: Codable {
+    enum Name: String, Codable {
+        case funk = "funk"
+        case soul = "soul"
+    }
+    
+    enum Pie: Int, Codable {
+        case 🍎 = 0
+        case 🎃 = 1599
+    }
+    
+    let name: Name
+    let food: Pie
+}
+
+struct SingleValues: Codable {
+    
+    enum Label: String, Codable {
+        case abc1 = "💩"
+        case efg = "🤖"
+    }
+    
+    enum Values: Int, Codable {
+        case egg = 128
+        case toast = 256
+    }
+    
+    let label: Label
+    //let more: [Label] //this fails
+    
+    let info: NestedSingleValues
+    
+    let val: Values
+}
+
 // ---------------------------------------------------------------------------------------------------------------------------------------------------//
 
 struct Layer1: Codable {

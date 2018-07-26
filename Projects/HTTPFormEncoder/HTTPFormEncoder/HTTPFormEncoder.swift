@@ -21,7 +21,9 @@ public class HTTPFormEncoder: Encoder {
     // This is an arrya so it can hold multiple parama keyed with `name[]` etc
     internal var parameters: [(String, String)] = []
     
-    //public init() {}
+    // Config
+    public typealias BoolBoxValue = (`true`: String, `false`: String)
+    public var boolBoxValues: BoolBoxValue = (true: "true", false: "false")
     
     public init(codingPath: [CodingKey] = []) {
         self.codingPath = codingPath
@@ -34,7 +36,7 @@ public class HTTPFormEncoder: Encoder {
         return self.parameters
     }
     
-    internal func box(_ value: Bool)   -> String { return "\(value ? "true" : "false")" }
+    internal func box(_ value: Bool)   -> String { return "\(value ? self.boolBoxValues.true : self.boolBoxValues.false)" }
     internal func box(_ value: Int)    -> String { return "\(value)" }
     internal func box(_ value: Int8)   -> String { return "\(value)" }
     internal func box(_ value: Int16)  -> String { return "\(value)" }
@@ -52,6 +54,9 @@ public class HTTPFormEncoder: Encoder {
     internal func box_<T: Encodable>(_ value: T) throws -> String /*where T : Encodable*/ {
         
         if T.self == Int.self {
+            return self.box(value as! Int)
+        }
+        if T.self == Int64.self { //TODO: all other ints
             return self.box(value as! Int64)
         }
         else if T.self == Double.self {
@@ -98,7 +103,14 @@ extension HTTPFormEncoder /* Encoder Overrides */ {
     }
     
     public func singleValueContainer() -> SingleValueEncodingContainer {
-        fatalError("NOT IMP")
+        
+        var containerName: String? = self.codingPath.first?.stringValue
+        
+        if let name = containerName {
+            containerName = self.codingPath[1...].reduce(name) { $0 + "[\($1.stringValue)]" }
+        }
+        
+        return HTTPFormSingleValueEncodingContainer(referencing: self, codingPath: self.codingPath, name: containerName ?? "UNSUPPORTED")
     }
     
     public func nestedContainer<NestedKey, Key>(keyedBy keyType: NestedKey.Type, forKey key: Key) -> KeyedEncodingContainer<NestedKey> {
