@@ -80,3 +80,48 @@ struct SingleValues: Codable {
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------//
 
+struct Layer1: Codable {
+    let l1a: String?
+    let l1b: Int
+}
+
+struct Layer2: Codable {
+    let l2a: Double?
+    let l2b: Layer1
+}
+
+struct Layer3: Codable {
+    let l3a: Layer2?
+    let l3b: Layer2
+}
+
+struct Layer4: Codable {
+    let l4a: Bool?
+    let l4b: Layer3
+}
+
+struct JSON2: Codable {
+    
+    let thing: [String]
+    
+    let snufkin: Layer1
+    
+    let moomin: Layer4
+}
+
+struct JSON3: Codable {
+    
+    let stuff: [Layer1]
+    
+}
+
+struct Nonsense: Codable {
+    
+    let pup: [[String]]
+    let birb:[[[Int]]]
+}
+struct JSON4: Codable {
+    let bleh : Nonsense
+}
+
+
