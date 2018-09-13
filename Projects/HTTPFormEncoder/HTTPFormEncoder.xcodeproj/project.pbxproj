@@ -163,6 +163,7 @@
 				TargetAttributes = {
 					E844A91020F49C6B00D0B386 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					E844A91820F49C6B00D0B386 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -373,7 +374,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lionheartapplications.HTTPFormEncoder;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -403,7 +404,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lionheartapplications.HTTPFormEncoder;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
